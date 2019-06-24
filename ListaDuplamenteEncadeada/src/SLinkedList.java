@@ -193,10 +193,12 @@ public class SLinkedList<T> {
         }
         if(temp.getAnterior() == null) {
             head = temp.getNext();
+            head.setAnterior(null);
         }else {
             temp.getAnterior().setNext(temp.getNext());
             if(temp == tail) {
-                tail = temp;
+                tail = temp.getAnterior();
+                tail.setAnterior(null);
             }
         }
         size--;
