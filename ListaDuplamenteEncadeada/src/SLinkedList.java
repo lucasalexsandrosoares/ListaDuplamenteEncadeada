@@ -218,15 +218,23 @@ public class SLinkedList<T> {
         Node<T> newNode = new Node<T>();
         newNode.setValue(value);
         newNode.setNext(temp);
-        newNode.setAnterior(temp.getAnterior());
-        if(temp.getAnterior() == null) {
+        if(head == null) {
             head = newNode;
             head.setAnterior(null);
         }else {
-            temp.getAnterior().setNext(newNode);
-            if(temp == tail) {
-                tail = temp;
-                tail.setNext(null);
+            if(index == size()){
+                addLast(value);
+                size --;
+            }
+            else {
+                Node<T> before = temp.getAnterior();
+                newNode.setAnterior(temp.getAnterior());
+                before.setNext(newNode);
+                temp.setAnterior(newNode);
+                if (temp == tail) {
+                    tail = temp;
+                    tail.setNext(null);
+                }
             }
         }
         size++;
